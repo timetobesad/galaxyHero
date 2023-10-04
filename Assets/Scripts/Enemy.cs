@@ -20,6 +20,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int healthVal = 100;
 
+    [SerializeField]
+    private int pointForDestroy = 0;
+
+    public int PointForDestroy
+    {
+        get { return this.pointForDestroy; }
+    }
+
     public int Id
     {
         get { return this.id; }
@@ -56,7 +64,7 @@ public class Enemy : MonoBehaviour
 
             EnemySpawn enSys = (EnemySpawn)FindAnyObjectByType(typeof(EnemySpawn));
             enSys.freeId(id);
-            enSys.spawn();
+            enSys.spawn();  
         }
     }
 

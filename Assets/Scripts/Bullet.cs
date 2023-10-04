@@ -43,6 +43,8 @@ public class Bullet : MonoBehaviour
         enSys.freeId(enemy.GetComponent<Enemy>().Id);
         Destroy(enemy);
         enSys.spawn();
+
+        FindAnyObjectByType<ScoreManager>().addPoint(enemy.GetComponent<Enemy>().PointForDestroy);
     }
 
     private void destBullet()

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int points;
+
+    public Rect rHint;
+    public GUIStyle style;
+
+    public void OnGUI()
     {
-        
+        GUI.Box(rHint, string.Format("Рахунок: {0}", points), style);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void addPoint(int count)
     {
-        
+        points += count;
     }
 }
