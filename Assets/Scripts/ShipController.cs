@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ShipController : MonoBehaviour
 {
     public float speedMove = 3;
@@ -24,14 +25,17 @@ public class ShipController : MonoBehaviour
 
     public float powerOfShot;
 
+    public AudioClip[] shotClips;
+
+    private AudioSource audioSrc;
+
+    private void Start()
+    {
+        this.audioSrc = GetComponent<AudioSource>();
+    }
     void Update()
     {
         shipMovement();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            fireShip();
-        }
     }
     private void shipMovement()
     {
@@ -59,11 +63,5 @@ public class ShipController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow) && (transform.position.x > minRightX))
             transform.Translate(Vector3.left * speedMove * Time.deltaTime);
-    }
-
-    private void fireShip()
-    {
-        GameObject bullet = GameObject.Instantiate(bulletObj, cannon.position, cannon.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(-Vector3.forward, ForceMode.Impulse);
     }
 }

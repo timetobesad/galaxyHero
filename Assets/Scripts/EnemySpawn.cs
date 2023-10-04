@@ -11,6 +11,8 @@ public class EnemySpawn : MonoBehaviour
 
     public GameObject enemyPref;
 
+    public GameObject[] enemyPrefs;
+
     private void Start()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag(tagPoint);
@@ -34,7 +36,7 @@ public class EnemySpawn : MonoBehaviour
         }
         while (!enemys[id].IsAvailable);
 
-        GameObject enObj = Instantiate(enemyPref, enemys[id].Position, Quaternion.identity);
+        GameObject enObj = Instantiate(enemyPrefs[Random.Range(0, enemyPrefs.Length - 1)], enemys[id].Position, Quaternion.identity);
         enObj.GetComponent<Enemy>().setId(id);
         enemys[id].IsAvailable = false;
     }
