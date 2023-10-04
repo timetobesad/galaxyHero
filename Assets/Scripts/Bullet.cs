@@ -12,6 +12,13 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private int dammage;
 
+    [SerializeField]
+    private int timeAutoDestory = 5;
+
+    private void Start()
+    {
+        Invoke("destBullet", timeAutoDestory);
+    }
     private void Update()
     {
         transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
@@ -36,5 +43,10 @@ public class Bullet : MonoBehaviour
         enSys.freeId(enemy.GetComponent<Enemy>().Id);
         Destroy(enemy);
         enSys.spawn();
+    }
+
+    private void destBullet()
+    {
+        Destroy(gameObject);
     }
 }
