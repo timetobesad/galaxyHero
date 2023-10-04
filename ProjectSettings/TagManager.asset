@@ -8,6 +8,8 @@ TagManager:
   - scrap
   - bullet
   - enemy
+  - bulletEnemy
+  - player
   layers:
   - Default
   - TransparentFX

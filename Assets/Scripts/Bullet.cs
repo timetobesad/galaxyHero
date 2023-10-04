@@ -9,11 +9,23 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private string tagEnemy;
 
+    public string TagEnemy
+    {
+        get { return this.tagEnemy; }
+    }
+
     [SerializeField]
     private int dammage;
 
     [SerializeField]
     private int timeAutoDestory = 5;
+
+    public hitShot hit;
+
+    public int Dammage
+    {
+        get { return this.dammage; }
+    }
 
     private void Start()
     {
@@ -26,25 +38,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.tag == tagEnemy)
-        {
-            Enemy enemy = coll.GetComponent<Enemy>();
-            enemy.makeDammage(dammage);
+        hit(coll.gameObject, this);
 
-            if(!enemy.IsLAlive) destroyEnemy(coll.gameObject);
-        }
-
-        Destroy(gameObject);
-    }
-
-    private void destroyEnemy(GameObject enemy)
-    {
-        EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
-        enSys.freeId(enemy.GetComponent<Enemy>().Id);
-        Destroy(enemy);
-        enSys.spawn();
-
-        FindAnyObjectByType<ScoreManager>().addPoint(enemy.GetComponent<Enemy>().PointForDestroy);
+        Ship ship = coll.GetComponent<Ship>();
+        if (!ship.IsAlive) ship.destoryEnemy();
     }
 
     private void destBullet()

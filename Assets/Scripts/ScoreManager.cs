@@ -10,6 +10,11 @@ public class ScoreManager : MonoBehaviour
     public Rect rHint;
     public GUIStyle style;
 
+    public int Points
+    {
+        get { return this.points; }
+    }
+
     public void OnGUI()
     {
         GUI.Box(rHint, string.Format("Рахунок: {0}", points), style);

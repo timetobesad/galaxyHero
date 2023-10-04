@@ -9,12 +9,12 @@ public class EnemySpawn : MonoBehaviour
 
     private EnemyInfo[] enemys;
 
-    public GameObject enemyPref;
-
     public GameObject[] enemyPrefs;
 
     private void Start()
     {
+        Time.timeScale = 1;
+
         GameObject[] objs = GameObject.FindGameObjectsWithTag(tagPoint);
 
         enemys = new EnemyInfo[objs.Length];

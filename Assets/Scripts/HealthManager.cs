@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour, Ship
 {
     private int healthVal = 100;
     private int armourVal = 0;
@@ -15,9 +15,11 @@ public class HealthManager : MonoBehaviour
 
     public GUIStyle styleHud;
 
-    private void Update()
+    public EndGame endGame;
+
+    public bool IsAlive
     {
-        
+        get { return this.healthVal > 0; }
     }
 
     private void OnGUI()
@@ -27,5 +29,17 @@ public class HealthManager : MonoBehaviour
 
         GUI.Box(rHeathHud, healthVal.ToString(), styleHud);
         GUI.Box(rArmourHud, armourVal.ToString(), styleHud);
+    }
+
+    public void makeDamge(int damage)
+    {
+        healthVal -= damage;
+
+        if (healthVal < 0) healthVal = 0;
+    }
+
+    public void destoryEnemy()
+    {
+        endGame.enabled = true;
     }
 }

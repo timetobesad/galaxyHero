@@ -14,6 +14,8 @@ public class WeaponManager : MonoBehaviour
     public Rect rHudHint;
     public Rect rHudBullet;
 
+    public AudioClip clipHint;
+
     public GUIStyle styleHint;
 
     private void Start()
@@ -47,11 +49,15 @@ public class WeaponManager : MonoBehaviour
     {
         for (int i = 0; i < weapons[idWeapon].Cannons.Length; i++)
         {
-            GameObject.Instantiate(weapons[idWeapon].BulletPref, weapons[idWeapon].Cannons[i].position, weapons[idWeapon].Cannons[i].rotation);
+            GameObject shell = GameObject.Instantiate(weapons[idWeapon].BulletPref, weapons[idWeapon].Cannons[i].position, weapons[idWeapon].Cannons[i].rotation);
+            shell.GetComponent<Bullet>().hit = hitEnemy;
 
-            audioSrc.Stop();
-            audioSrc.clip = weapons[idWeapon].Clip;
-            audioSrc.Play();
+            if (weapons[i].Clip)
+            {
+                audioSrc.Stop();
+                audioSrc.clip = weapons[idWeapon].Clip;
+                audioSrc.Play();
+            }
         }
     }
 
@@ -59,5 +65,18 @@ public class WeaponManager : MonoBehaviour
     {
         GUI.Box(rHudHint, hudHint, styleHint);
         GUI.DrawTexture(rHudBullet, weapons[idWeapon].IconHud);
+    }
+
+    public void hitEnemy(GameObject hitObj, Bullet bullet)
+    {
+        if (hitObj.tag == bullet.TagEnemy)
+        {
+            Enemy enemy = hitObj.GetComponent<Enemy>();
+            enemy.makeDammage(bullet.Dammage);
+
+            audioSrc.Stop();
+            audioSrc.clip = clipHint;
+            audioSrc.Play();
+        }
     }
 }

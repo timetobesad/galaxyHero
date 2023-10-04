@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class Enemy : MonoBehaviour, Ship
 {
     public float speed;
 
@@ -23,6 +24,15 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int pointForDestroy = 0;
 
+    [SerializeField]
+    private bool isShoting = false;
+
+    [SerializeField]
+    private float delayShot = 0;
+
+    [SerializeField]
+    private Weapon weapon;
+
     public int PointForDestroy
     {
         get { return this.pointForDestroy; }
@@ -38,9 +48,22 @@ public class Enemy : MonoBehaviour
         get { return healthVal > 0; }
     }
 
+    public bool IsAlive
+    {
+        get { return this.healthVal > 0; }
+    }
+
+    public AudioClip clipHit;
+    private AudioSource audioSrc;
+
     private void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
+
         cam = FindAnyObjectByType<Camera>();
+
+        if (isShoting)
+            InvokeRepeating("shot", 0, delayShot);
     }
 
     private void Update()
@@ -76,5 +99,41 @@ public class Enemy : MonoBehaviour
     public void makeDammage(int dammage)
     {
         healthVal -= dammage;
+    }
+
+    private void shot()
+    {
+        if (!isShoting) return;
+
+        for (int i = 0; i < weapon.Cannons.Length; i++)
+        {
+            GameObject shell = Instantiate(weapon.BulletPref, weapon.Cannons[i].position, weapon.Cannons[i].rotation);
+            shell.GetComponent<Bullet>().hit = hitFromPlayer;
+        }
+    }
+
+    public void hitFromPlayer(GameObject hitObj, Bullet bullet)
+    {
+        if (hitObj.tag == bullet.TagEnemy)
+        {
+            if (audioSrc)
+            {
+                audioSrc.Stop();
+                audioSrc.clip = clipHit;
+                audioSrc.Play();
+            }
+
+            hitObj.GetComponent<HealthManager>().makeDamge(bullet.Dammage);
+        }
+    }
+
+    public void destoryEnemy()
+    {
+        FindAnyObjectByType<ScoreManager>().addPoint(pointForDestroy);
+
+        EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
+        enSys.freeId(id);
+        enSys.spawn();
+        Destroy(gameObject);
     }
 }
