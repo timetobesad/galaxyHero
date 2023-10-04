@@ -1941,6 +1941,7 @@ MonoBehaviour:
   tagDestroyed: scrap
   hpBarSize: {x: 60, y: 20}
   hpBarTexture: {fileID: 2800000, guid: b0d37fd06f5cda642bb048b8839b4814, type: 3}
+  healthVal: 200
 --- !u!1 &6262156662423438772
 GameObject:
   m_ObjectHideFlags: 0

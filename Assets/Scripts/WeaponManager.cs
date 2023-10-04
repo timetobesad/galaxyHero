@@ -45,12 +45,12 @@ public class WeaponManager : MonoBehaviour
 
     private void fireShip()
     {
-        for (int i = 0; i < weapons[idWeapon].CountCannons; i++)
+        for (int i = 0; i < weapons[idWeapon].Cannons.Length; i++)
         {
-            GameObject.Instantiate(weapons[idWeapon].bullePref, weapons[idWeapon].cannons[i].position, weapons[idWeapon].cannons[i].rotation);
+            GameObject.Instantiate(weapons[idWeapon].BulletPref, weapons[idWeapon].Cannons[i].position, weapons[idWeapon].Cannons[i].rotation);
 
             audioSrc.Stop();
-            audioSrc.clip = weapons[idWeapon].clip;
+            audioSrc.clip = weapons[idWeapon].Clip;
             audioSrc.Play();
         }
     }
@@ -58,6 +58,6 @@ public class WeaponManager : MonoBehaviour
     private void OnGUI()
     {
         GUI.Box(rHudHint, hudHint, styleHint);
-        GUI.DrawTexture(rHudBullet, weapons[idWeapon].iconHud);
+        GUI.DrawTexture(rHudBullet, weapons[idWeapon].IconHud);
     }
 }

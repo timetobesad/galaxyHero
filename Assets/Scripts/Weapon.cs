@@ -1,17 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class Weapon
 {
-    public AudioClip clip;
-    public GameObject bullePref;
-    public Transform[] cannons;
-    public Texture iconHud;
+    [SerializeField]
+    private AudioClip clip;
+    [SerializeField]
+    private GameObject bullePref;
+    [SerializeField]
+    private Transform[] cannons;
+    [SerializeField]
+    private Texture iconHud;
+    [SerializeField]
+    private int dammage;
 
-    public int CountCannons
+    public AudioClip Clip
     {
-        get { return this.cannons.Length; }
+        get { return this.clip; }
+    }
+
+    public GameObject BulletPref
+    {
+        get { return this.bullePref; }
+    }
+
+    public Transform[] Cannons
+    {
+        get { return this.cannons; }
+    }
+
+    public Texture IconHud
+    {
+        get { return this.iconHud; }
+    }
+
+    public int Dammage
+    {
+        get { return this.dammage; }
     }
 }

@@ -129,3 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   tagEnemy: enemy
+  dammage: 30

@@ -17,9 +17,17 @@ public class Enemy : MonoBehaviour
 
     public Texture2D hpBarTexture;
 
+    [SerializeField]
+    private int healthVal = 100;
+
     public int Id
     {
         get { return this.id; }
+    }
+
+    public bool IsLAlive
+    {
+        get { return healthVal > 0; }
     }
 
     private void Start()
@@ -36,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Box(new Rect(screenPos.x - (hpBarSize.x / 2), Screen.height - screenPos.y - 70 - (hpBarSize.y / 2), hpBarSize.x, hpBarSize.y), "100");
+        GUI.Box(new Rect(screenPos.x - (hpBarSize.x / 2), Screen.height - screenPos.y - 70 - (hpBarSize.y / 2), hpBarSize.x, hpBarSize.y), healthVal.ToString());
         GUI.DrawTexture(new Rect(screenPos.x - (hpBarSize.x / 2), Screen.height - screenPos.y - 70 - (hpBarSize.y / 2), hpBarSize.x, hpBarSize.y), hpBarTexture);
     }
 
@@ -55,5 +63,10 @@ public class Enemy : MonoBehaviour
     public void setId(int id)
     {
         this.id = id;
+    }
+
+    public void makeDammage(int dammage)
+    {
+        healthVal -= dammage;
     }
 }

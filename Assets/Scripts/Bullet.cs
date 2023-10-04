@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
-    public string tagEnemy;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private string tagEnemy;
+
+    [SerializeField]
+    private int dammage;
+
     private void Update()
     {
         transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
@@ -15,11 +21,20 @@ public class Bullet : MonoBehaviour
     {
         if (coll.tag == tagEnemy)
         {
-            EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
-            enSys.freeId(coll.GetComponent<Enemy>().Id);
-            Destroy(coll.gameObject);
-            enSys.spawn();
-            Destroy(gameObject);
+            Enemy enemy = coll.GetComponent<Enemy>();
+            enemy.makeDammage(dammage);
+
+            if(!enemy.IsLAlive) destroyEnemy(coll.gameObject);
         }
+
+        Destroy(gameObject);
+    }
+
+    private void destroyEnemy(GameObject enemy)
+    {
+        EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
+        enSys.freeId(enemy.GetComponent<Enemy>().Id);
+        Destroy(enemy);
+        enSys.spawn();
     }
 }
