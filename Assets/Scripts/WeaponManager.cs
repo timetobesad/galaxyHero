@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -11,6 +9,13 @@ public class WeaponManager : MonoBehaviour
 
     private AudioSource audioSrc;
 
+    public string hudHint;
+
+    public Rect rHudHint;
+    public Rect rHudBullet;
+
+    public GUIStyle styleHint;
+
     private void Start()
     {
         this.audioSrc = GetComponent<AudioSource>();
@@ -20,6 +25,22 @@ public class WeaponManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) fireShip();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (idWeapon <= 0)
+                idWeapon = weapons.Length - 1;
+            else
+                idWeapon--;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (idWeapon >= weapons.Length - 1)
+                idWeapon = 0;
+            else
+                idWeapon++;
+        }
     }
 
     private void fireShip()
@@ -32,5 +53,11 @@ public class WeaponManager : MonoBehaviour
             audioSrc.clip = weapons[idWeapon].clip;
             audioSrc.Play();
         }
+    }
+
+    private void OnGUI()
+    {
+        GUI.Box(rHudHint, hudHint, styleHint);
+        GUI.DrawTexture(rHudBullet, weapons[idWeapon].iconHud);
     }
 }

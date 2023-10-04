@@ -8,6 +8,7 @@ public class Weapon
     public AudioClip clip;
     public GameObject bullePref;
     public Transform[] cannons;
+    public Texture iconHud;
 
     public int CountCannons
     {
