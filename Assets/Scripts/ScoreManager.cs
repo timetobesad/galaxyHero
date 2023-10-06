@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
 
     public void OnGUI()
     {
-        GUI.Box(rHint, string.Format("Рахунок: {0}", points), style);
+        GUI.Box(rHint, string.Format("Scores: {0}", points), style);
     }
 
     public void addPoint(int count)

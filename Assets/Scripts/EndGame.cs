@@ -28,12 +28,12 @@ public class EndGame : MonoBehaviour
         GUI.depth = 144;
 
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), bgTexture);
-        GUI.Box(rHintEndGame, string.Format("Гра закінчена з рахунком {0},непоганий результат c: \n\n Спробуєш ще раз ?", score.Points), style);
+        GUI.Box(rHintEndGame, string.Format("Game over, you score result {0} c: \n\n Retry level ?", score.Points), style);
 
-        if (GUI.Button(rMenuBtn, "В головне меню", styleBtn))
+        if (GUI.Button(rMenuBtn, "Main menu", styleBtn))
             SceneManager.LoadScene(menuSceneId);
 
-        if (GUI.Button(rNewGame, "Переграти рівень", styleBtn))
+        if (GUI.Button(rNewGame, "Retry", styleBtn))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         GUI.depth = 1;

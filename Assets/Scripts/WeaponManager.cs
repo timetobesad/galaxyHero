@@ -74,6 +74,8 @@ public class WeaponManager : MonoBehaviour
             Enemy enemy = hitObj.GetComponent<Enemy>();
             enemy.makeDammage(bullet.Dammage);
 
+            if (audioSrc.isPlaying && audioSrc.clip.name == clipHint.name) return;
+
             audioSrc.Stop();
             audioSrc.clip = clipHint;
             audioSrc.Play();

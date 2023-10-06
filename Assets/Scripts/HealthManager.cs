@@ -17,6 +17,12 @@ public class HealthManager : MonoBehaviour, Ship
 
     public EndGame endGame;
 
+    public float timeShowBloodScr;
+
+    public ScreenEffect effectMng;
+
+    private Coroutine flashEffCrt;
+
     public bool IsAlive
     {
         get { return this.healthVal > 0; }
@@ -35,11 +41,27 @@ public class HealthManager : MonoBehaviour, Ship
     {
         healthVal -= damage;
 
-        if (healthVal < 0) healthVal = 0;
+        if (healthVal < 0)
+            healthVal = 0;
+        //else
+            enBloodScreen();
     }
 
     public void destoryEnemy()
     {
-        endGame.enabled = true;
+        //endGame.enabled = true;
+    }
+
+    private void enBloodScreen()
+    {
+        CancelInvoke();
+
+        effectMng.enbBloodScreen();
+        Invoke("disBloodScreen", timeShowBloodScr);
+    }
+
+    private void disBloodScreen()
+    {
+        effectMng.disBloodScreen();
     }
 }

@@ -118,9 +118,11 @@ public class Enemy : MonoBehaviour, Ship
         {
             if (audioSrc)
             {
-                audioSrc.Stop();
-                audioSrc.clip = clipHit;
-                audioSrc.Play();
+                if (!audioSrc.isPlaying)
+                {
+                    audioSrc.clip = clipHit;
+                    audioSrc.Play();
+                }
             }
 
             hitObj.GetComponent<HealthManager>().makeDamge(bullet.Dammage);

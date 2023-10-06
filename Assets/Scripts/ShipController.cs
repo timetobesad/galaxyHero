@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class ShipController : MonoBehaviour
 {
     public float speedMove = 3;
@@ -20,19 +19,6 @@ public class ShipController : MonoBehaviour
 
     public GameObject objVisual;
 
-    public GameObject bulletObj;
-    public Transform cannon;
-
-    public float powerOfShot;
-
-    public AudioClip[] shotClips;
-
-    private AudioSource audioSrc;
-
-    private void Start()
-    {
-        this.audioSrc = GetComponent<AudioSource>();
-    }
     void Update()
     {
         shipMovement();

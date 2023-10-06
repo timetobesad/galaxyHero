@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ce9562996422c647985cb8addcf58f5, type: 2}
+  - {fileID: 2100000, guid: a3d690aea79fd1746a1b8e18f7178f17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,10 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9204961920704649207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d60a5da3055d04c866d3108b65fbd3, type: 3}
+  m_Script: {fileID: 11500000, guid: e2f77d2d9f662cb45b05dcb15c5a64e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 44
+  speed: 35
   tagEnemy: enemy
   dammage: 30
-  timeAutoDestory: 3
+  timeAutoDestory: 5
