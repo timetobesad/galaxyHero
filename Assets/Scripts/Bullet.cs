@@ -38,7 +38,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
+        Debug.Log(coll.name);
+
         hit(coll.gameObject, this);
+
+        if(!(coll.gameObject.tag == tagEnemy))
+            return;
 
         Ship ship = coll.GetComponent<Ship>();
         if (!ship.IsAlive) ship.destoryEnemy();

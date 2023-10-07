@@ -41,8 +41,6 @@ public class EnemySpawn : MonoBehaviour
         GameObject enObj = Instantiate(enemyPrefs[Random.Range(0, enemyPrefs.Length - 1)], enemys[id].Position, Quaternion.identity);
         enObj.GetComponent<Enemy>().setId(id);
         enemys[id].IsAvailable = false;
-
-        Debug.Log("run");
     }
 
     public void freeId(int id)

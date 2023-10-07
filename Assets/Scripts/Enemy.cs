@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour, Ship
 
     public float delayTurn = 5;
     public bool isTurn = false;
+
+    private bool isDestroyed = false;
+
     public int PointForDestroy
     {
         get { return this.pointForDestroy; }
@@ -95,13 +98,7 @@ public class Enemy : MonoBehaviour, Ship
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.tag == tagDestroyed)
-        {
-            Destroy(gameObject);
-
-            EnemySpawn enSys = (EnemySpawn)FindAnyObjectByType(typeof(EnemySpawn));
-            enSys.freeId(id);
-            enSys.spawn();  
-        }
+            destoryEnemy();
     }
 
     public void setId(int id)
@@ -144,7 +141,10 @@ public class Enemy : MonoBehaviour, Ship
 
     public void destoryEnemy()
     {
-        Debug.Log("SPAWN");
+        if (isDestroyed)
+            return;
+
+        isDestroyed = true;
 
         FindAnyObjectByType<ScoreManager>().addPoint(pointForDestroy);
 
