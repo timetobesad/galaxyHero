@@ -1,11 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour, Ship
 {
-    public float speed;
+    public float minSpeed;
+    public float maxSpeed;
+
+    private float speed;
 
     public string tagDestroyed;
 
@@ -33,6 +35,8 @@ public class Enemy : MonoBehaviour, Ship
     [SerializeField]
     private Weapon weapon;
 
+    public float delayTurn = 5;
+    public bool isTurn = false;
     public int PointForDestroy
     {
         get { return this.pointForDestroy; }
@@ -43,11 +47,6 @@ public class Enemy : MonoBehaviour, Ship
         get { return this.id; }
     }
 
-    public bool IsLAlive
-    {
-        get { return healthVal > 0; }
-    }
-
     public bool IsAlive
     {
         get { return this.healthVal > 0; }
@@ -56,14 +55,28 @@ public class Enemy : MonoBehaviour, Ship
     public AudioClip clipHit;
     private AudioSource audioSrc;
 
+    private List<int> dirrTurnListRand;
+
     private void Start()
     {
+        dirrTurnListRand = new List<int>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            dirrTurnListRand.Add(0);
+            dirrTurnListRand.Add(1);
+        }
+
+        delayTurnShip();
+
+        speed = Random.Range(minSpeed, maxSpeed);
+
         audioSrc = GetComponent<AudioSource>();
 
         cam = FindAnyObjectByType<Camera>();
 
         if (isShoting)
-            InvokeRepeating("shot", 0, delayShot);
+            InvokeRepeating("shot", 0, Random.Range(1, delayShot));
     }
 
     private void Update()
@@ -131,11 +144,69 @@ public class Enemy : MonoBehaviour, Ship
 
     public void destoryEnemy()
     {
+        Debug.Log("SPAWN");
+
         FindAnyObjectByType<ScoreManager>().addPoint(pointForDestroy);
 
         EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
         enSys.freeId(id);
         enSys.spawn();
         Destroy(gameObject);
+    }
+
+    private void delayTurnShip()
+    {
+        if (!isTurn) return;
+
+        Invoke("turnEnemyShip", Random.Range(1, delayTurn));
+
+        int dirr = getDirrTurn();
+
+        if (!System.Convert.ToBoolean(dirr)) return;
+
+        transform.Translate(dirr, 0f, 0f);
+    }
+
+    public int getDirrTurn()
+    {
+        int result = 0;
+
+        do
+        {
+            result = Random.Range(-1, 2);
+        }
+        while(result == 0);
+
+        if (!checkAvilTurn(result))
+        {
+            if (result == -1)
+                result = 1;
+            else
+                result = -1;
+
+            if (!checkAvilTurn(result))
+                result = 0;
+        }
+
+        return result;
+    }
+
+    private void turnEnemyShip()
+    {
+        delayTurnShip();
+    }
+
+    private bool checkAvilTurn(int dirr)
+    {
+        Ray ray = new Ray(transform.position, new Vector3(dirr, 0, 0));
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 2);
+
+        if (!Physics.Raycast(ray, 1.44f))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

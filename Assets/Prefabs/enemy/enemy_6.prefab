@@ -3523,14 +3523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca7dd18729ad3141a406801ae63885b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  minSpeed: 1
+  maxSpeed: 4
   tagDestroyed: scrap
   hpBarSize: {x: 60, y: 20}
   hpBarTexture: {fileID: 2800000, guid: 74e480fa44a99004a9321530c06f6f98, type: 3}
   healthVal: 100
   pointForDestroy: 10
   isShoting: 1
-  delayShot: 1
+  delayShot: 4
   weapon:
     clip: {fileID: 0}
     bullePref: {fileID: 2170462083749545964, guid: 95f14979d3796044499c3b84070491e4, type: 3}
@@ -3538,6 +3539,8 @@ MonoBehaviour:
     - {fileID: 5098022928547583697}
     iconHud: {fileID: 0}
     dammage: 10
+  delayTurn: 3
+  isTurn: 1
   clipHit: {fileID: 8300000, guid: 20021d1c8ae75c240ad8f1943ab3ebbd, type: 3}
 --- !u!82 &2725425060623821517
 AudioSource:

@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca7dd18729ad3141a406801ae63885b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  minSpeed: 1
+  maxSpeed: 3
   tagDestroyed: scrap
   hpBarSize: {x: 60, y: 20}
   hpBarTexture: {fileID: 2800000, guid: 74e480fa44a99004a9321530c06f6f98, type: 3}
@@ -126,6 +127,8 @@ MonoBehaviour:
     cannons: []
     iconHud: {fileID: 0}
     dammage: 0
+  delayTurn: 0
+  isTurn: 0
   clipHit: {fileID: 8300000, guid: 20021d1c8ae75c240ad8f1943ab3ebbd, type: 3}
 --- !u!54 &8921334803547893986
 Rigidbody:

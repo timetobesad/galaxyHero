@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    public int countEnemys = 5;
+
     public GameObject parrentPoint;
 
     public string tagPoint;
@@ -22,7 +24,7 @@ public class EnemySpawn : MonoBehaviour
         for (int i = 0; i < objs.Length; i++)
             enemys[i] = new EnemyInfo(objs[i].transform.position);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < countEnemys; i++)
             spawn();
     }
 
@@ -39,6 +41,8 @@ public class EnemySpawn : MonoBehaviour
         GameObject enObj = Instantiate(enemyPrefs[Random.Range(0, enemyPrefs.Length - 1)], enemys[id].Position, Quaternion.identity);
         enObj.GetComponent<Enemy>().setId(id);
         enemys[id].IsAvailable = false;
+
+        Debug.Log("run");
     }
 
     public void freeId(int id)

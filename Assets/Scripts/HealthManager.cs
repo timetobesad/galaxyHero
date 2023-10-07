@@ -43,13 +43,13 @@ public class HealthManager : MonoBehaviour, Ship
 
         if (healthVal < 0)
             healthVal = 0;
-        //else
+       else
             enBloodScreen();
     }
 
     public void destoryEnemy()
     {
-        //endGame.enabled = true;
+        endGame.enabled = true;
     }
 
     private void enBloodScreen()
