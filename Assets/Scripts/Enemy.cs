@@ -116,27 +116,7 @@ public class Enemy : MonoBehaviour, Ship
         if (!isShoting) return;
 
         for (int i = 0; i < weapon.Cannons.Length; i++)
-        {
-            GameObject shell = Instantiate(weapon.BulletPref, weapon.Cannons[i].position, weapon.Cannons[i].rotation);
-            shell.GetComponent<Bullet>().hit = hitFromPlayer;
-        }
-    }
-
-    public void hitFromPlayer(GameObject hitObj, Bullet bullet)
-    {
-        if (hitObj.tag == bullet.TagEnemy)
-        {
-            if (audioSrc)
-            {
-                if (!audioSrc.isPlaying)
-                {
-                    audioSrc.clip = clipHit;
-                    audioSrc.Play();
-                }
-            }
-
-            hitObj.GetComponent<HealthManager>().makeDamge(bullet.Dammage);
-        }
+            Instantiate(weapon.BulletPref, weapon.Cannons[i].position, weapon.Cannons[i].rotation);
     }
 
     public void destoryEnemy()

@@ -36,8 +36,7 @@ public class HealthManager : MonoBehaviour, Ship
         GUI.Box(rHeathHud, healthVal.ToString(), styleHud);
         GUI.Box(rArmourHud, armourVal.ToString(), styleHud);
     }
-
-    public void makeDamge(int damage)
+    public void makeDammage(int damage)
     {
         healthVal -= damage;
 
@@ -46,7 +45,6 @@ public class HealthManager : MonoBehaviour, Ship
        else
             enBloodScreen();
     }
-
     public void destoryEnemy()
     {
         endGame.enabled = true;

@@ -49,8 +49,7 @@ public class WeaponManager : MonoBehaviour
     {
         for (int i = 0; i < weapons[idWeapon].Cannons.Length; i++)
         {
-            GameObject shell = GameObject.Instantiate(weapons[idWeapon].BulletPref, weapons[idWeapon].Cannons[i].position, weapons[idWeapon].Cannons[i].rotation);
-            shell.GetComponent<Bullet>().hit = hitEnemy;
+            GameObject.Instantiate(weapons[idWeapon].BulletPref, weapons[idWeapon].Cannons[i].position, weapons[idWeapon].Cannons[i].rotation);
 
             if (weapons[i].Clip)
             {
@@ -73,12 +72,6 @@ public class WeaponManager : MonoBehaviour
         {
             Enemy enemy = hitObj.GetComponent<Enemy>();
             enemy.makeDammage(bullet.Dammage);
-
-            if (audioSrc.isPlaying && audioSrc.clip.name == clipHint.name) return;
-
-            audioSrc.Stop();
-            audioSrc.clip = clipHint;
-            audioSrc.Play();
         }
     }
 }

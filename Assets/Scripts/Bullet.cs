@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
@@ -20,16 +21,19 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private int timeAutoDestory = 5;
 
-    public hitShot hit;
-
     public int Dammage
     {
         get { return this.dammage; }
     }
 
+    public AudioClip clip;
+    private AudioSource audioSrc;
+
     private void Start()
     {
         Invoke("destBullet", timeAutoDestory);
+
+        audioSrc = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -38,15 +42,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        Debug.Log(coll.name);
-
-        hit(coll.gameObject, this);
-
         if(!(coll.gameObject.tag == tagEnemy))
             return;
 
-        Ship ship = coll.GetComponent<Ship>();
-        if (!ship.IsAlive) ship.destoryEnemy();
+        if (coll.gameObject.tag == tagEnemy)
+        {
+            Ship ship = coll.GetComponent<Ship>();
+            ship.makeDammage(dammage);
+
+            if (!ship.IsAlive) ship.destoryEnemy();
+
+            audioSrc.Play();
+        }        
     }
 
     private void destBullet()
