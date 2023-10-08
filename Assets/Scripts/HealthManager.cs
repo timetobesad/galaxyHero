@@ -45,7 +45,7 @@ public class HealthManager : MonoBehaviour, Ship
        else
             enBloodScreen();
     }
-    public void destoryEnemy()
+    public void destroyEnemy(bool isSpawnLoot = false)
     {
         endGame.enabled = true;
     }
@@ -61,5 +61,15 @@ public class HealthManager : MonoBehaviour, Ship
     private void disBloodScreen()
     {
         effectMng.disBloodScreen();
+    }
+
+    public void addHealth(int value)
+    {
+        healthVal += value;
+    }
+
+    public void addArmour(int value)
+    {
+        armourVal += value;
     }
 }

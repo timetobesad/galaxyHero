@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class AirDefence : MonoBehaviour
 {
-    public string[] enemyTags;
-
     public GameObject rockerPrf;
 
     public int idCannon = 0;
     public Transform[] cannons;
 
-    private void OnTriggerEnter(Collider coll)
+    [SerializeField]
+    private int countRocket;
+
+    public int CountRocket
     {
-        foreach (string tag in enemyTags)
-        {
-            if (tag == coll.tag)
-                launchRocker(coll.gameObject);
-        }
+        get { return this.countRocket; }
     }
 
-    private void launchRocker(GameObject target)
+    public void launchRocker(GameObject target)
     {
         GameObject rocket = Instantiate(rockerPrf, cannons[idCannon].position, cannons[idCannon].rotation);
-        rocket.GetComponent<AirDefRocket>().setTarget(target);
+        rocket.GetComponent<AirDefRocket>().setTarget(target.transform);
 
         if (idCannon == 0)
             idCannon = 1;
         else
             idCannon = 0;
+
+        countRocket--;
+    }
+
+    public void addRocket(int count)
+    {
+        countRocket += count;
     }
 }

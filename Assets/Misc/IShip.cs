@@ -2,7 +2,7 @@
 {
     public void makeDammage(int damage);
 
-    public void destoryEnemy();
+    public void destroyEnemy(bool isSpawnLoot);
 
     public bool IsAlive { get; }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class AirDefRocket : MonoBehaviour
 {
     public float speed;
-    private GameObject target;
+    private Transform target;
 
     private bool isSetTarget = false;
 
@@ -22,7 +22,7 @@ public class AirDefRocket : MonoBehaviour
         if (!isSetTarget || target == null) return;
 
         transform.TransformDirection(target.transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider coll)
@@ -32,7 +32,7 @@ public class AirDefRocket : MonoBehaviour
                 destEnemyRocket(coll.gameObject);
     }
 
-    public void setTarget(GameObject target)
+    public void setTarget(Transform target)
     {
         this.target = target;
         isSetTarget = true;

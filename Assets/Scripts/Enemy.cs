@@ -70,6 +70,8 @@ public class Enemy : MonoBehaviour, Ship
 
     private List<int> dirrTurnListRand;
 
+    public GameObject lootBoxObj;
+
     private void Start()
     {
         dirrTurnListRand = new List<int>();
@@ -108,7 +110,7 @@ public class Enemy : MonoBehaviour, Ship
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.tag == tagDestroyed)
-            destoryEnemy();
+            destroyEnemy();
     }
 
     public void setId(int id)
@@ -129,7 +131,7 @@ public class Enemy : MonoBehaviour, Ship
             Instantiate(weapon.BulletPref, weapon.Cannons[i].position, weapon.Cannons[i].rotation);
     }
 
-    public void destoryEnemy()
+    public void destroyEnemy(bool isSpawnLoot = false)
     {
         if (isDestroyed)
             return;
@@ -141,15 +143,15 @@ public class Enemy : MonoBehaviour, Ship
         EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
         enSys.freeId(idEnemy);
         enSys.spawn();
+
+        LootBoxManager.lootManager.spawnLoot(transform);
+
         Destroy(gameObject);
     }
 
     private void delayTurnShip()
     {
         if (!isTurn) return;
-
-        Invoke("turnEnemyShip", Random.Range(1, delayTurn));
-
         setSpeedRotate(getDirrTurn());
     }
 
@@ -203,5 +205,6 @@ public class Enemy : MonoBehaviour, Ship
     private void resetTurn()
     {
         speedRotate = 0;
+        Invoke("turnEnemyShip", Random.Range(1, delayTurn));
     }
 }

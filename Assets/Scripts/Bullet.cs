@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
             Ship ship = coll.GetComponent<Ship>();
             ship.makeDammage(dammage);
 
-            if (!ship.IsAlive) ship.destoryEnemy();
+            if (!ship.IsAlive) ship.destroyEnemy(true);
 
             audioSrc.Play();
         }        
