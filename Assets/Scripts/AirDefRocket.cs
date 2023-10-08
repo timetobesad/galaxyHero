@@ -9,6 +9,14 @@ public class AirDefRocket : MonoBehaviour
 
     public string[] enemyTags;
 
+    [SerializeField]
+    private float autoDest = 2f;
+
+    private void Start()
+    {
+        Invoke("delMe", autoDest);
+    }
+
     private void Update()
     {
         if (!isSetTarget || target == null) return;
@@ -33,6 +41,12 @@ public class AirDefRocket : MonoBehaviour
     private void destEnemyRocket(GameObject rocket)
     {
         Destroy(rocket);
+        Destroy(gameObject);
+    }
+
+
+    private void delMe()
+    {
         Destroy(gameObject);
     }
 }

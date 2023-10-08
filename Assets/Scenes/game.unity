@@ -256,6 +256,7 @@ MonoBehaviour:
   idCannon: 0
   cannons:
   - {fileID: 975210886}
+  - {fileID: 887789186}
 --- !u!1 &887789185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1493191566695691248, guid: 4816242495f9d0b48affa48171bd058d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1493191566695691249, guid: 4816242495f9d0b48affa48171bd058d, type: 3}
       propertyPath: m_Enabled
@@ -1505,7 +1506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1493191567602761051, guid: 4816242495f9d0b48affa48171bd058d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1493191567602761052, guid: 4816242495f9d0b48affa48171bd058d, type: 3}
       propertyPath: m_Enabled
@@ -1707,15 +1708,15 @@ PrefabInstance:
     - target: {fileID: 3967339952970954647, guid: 6734e8b8927140f40ad2d58058d34330, type: 3}
       propertyPath: enemyPrefs.Array.data[0]
       value: 
-      objectReference: {fileID: 8921334803547893988, guid: 5cf1caafa0e41f34ab77f83e3f641af7, type: 3}
+      objectReference: {fileID: 1221144567294188692, guid: 8aec26c979369b44f80334f3cbbe71ea, type: 3}
     - target: {fileID: 3967339952970954647, guid: 6734e8b8927140f40ad2d58058d34330, type: 3}
       propertyPath: enemyPrefs.Array.data[1]
       value: 
-      objectReference: {fileID: 8998072810939800024, guid: e1e997834b139f545980b650b3bae74c, type: 3}
+      objectReference: {fileID: 1221144567294188692, guid: 1327a4916d8837748aafc78c469bab5a, type: 3}
     - target: {fileID: 3967339952970954647, guid: 6734e8b8927140f40ad2d58058d34330, type: 3}
       propertyPath: enemyPrefs.Array.data[2]
       value: 
-      objectReference: {fileID: 5927888043975329330, guid: 2c49332aae2c8f94ba87b26db083a7b0, type: 3}
+      objectReference: {fileID: 5761702431724369496, guid: f3cac664c98cefb4c9aceacccef3fb33, type: 3}
     - target: {fileID: 3967339952970954647, guid: 6734e8b8927140f40ad2d58058d34330, type: 3}
       propertyPath: enemyPrefs.Array.data[3]
       value: 

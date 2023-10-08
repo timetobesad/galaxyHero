@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f63e3563daa4ee4f9d54c41973c7cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 30
   enemyTags:
   - bulletEnemy
+  autoDest: 1.5

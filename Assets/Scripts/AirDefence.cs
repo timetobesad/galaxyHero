@@ -24,5 +24,10 @@ public class AirDefence : MonoBehaviour
     {
         GameObject rocket = Instantiate(rockerPrf, cannons[idCannon].position, cannons[idCannon].rotation);
         rocket.GetComponent<AirDefRocket>().setTarget(target);
+
+        if (idCannon == 0)
+            idCannon = 1;
+        else
+            idCannon = 0;
     }
 }

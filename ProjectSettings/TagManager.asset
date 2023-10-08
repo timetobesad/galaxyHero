@@ -10,6 +10,8 @@ TagManager:
   - enemy
   - bulletEnemy
   - player
+  - turnDestMark
+  - turnMark
   layers:
   - Default
   - TransparentFX

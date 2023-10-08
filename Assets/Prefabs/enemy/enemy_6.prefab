@@ -3539,8 +3539,11 @@ MonoBehaviour:
     - {fileID: 5098022928547583697}
     iconHud: {fileID: 0}
     dammage: 10
-  delayTurn: 3
+  delayTurn: 5
   isTurn: 1
+  defSpeed: 1
+  speedRotate: 0
+  timeTurn: 2
   clipHit: {fileID: 8300000, guid: 20021d1c8ae75c240ad8f1943ab3ebbd, type: 3}
 --- !u!82 &2725425060623821517
 AudioSource:

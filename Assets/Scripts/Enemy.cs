@@ -7,11 +7,11 @@ public class Enemy : MonoBehaviour, Ship
     public float minSpeed;
     public float maxSpeed;
 
-    private float speed;
+    private float speedMoving;
 
     public string tagDestroyed;
 
-    private int id;
+    private int idEnemy;
 
     private Camera cam;
     private Vector3 screenPos;
@@ -40,6 +40,16 @@ public class Enemy : MonoBehaviour, Ship
 
     private bool isDestroyed = false;
 
+    #region turn variables
+
+    public float defSpeed = 1;
+    public float speedRotate = 1;
+    public float timeTurn = 2;
+
+    #endregion
+
+    private Vector3 markCord = Vector3.up;
+
     public int PointForDestroy
     {
         get { return this.pointForDestroy; }
@@ -47,7 +57,7 @@ public class Enemy : MonoBehaviour, Ship
 
     public int Id
     {
-        get { return this.id; }
+        get { return this.idEnemy; }
     }
 
     public bool IsAlive
@@ -72,7 +82,7 @@ public class Enemy : MonoBehaviour, Ship
 
         delayTurnShip();
 
-        speed = Random.Range(minSpeed, maxSpeed);
+        speedMoving = Random.Range(minSpeed, maxSpeed);
 
         audioSrc = GetComponent<AudioSource>();
 
@@ -84,7 +94,7 @@ public class Enemy : MonoBehaviour, Ship
 
     private void Update()
     {
-        transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+        transform.Translate(new Vector3(speedRotate, 0, -speedMoving) * Time.deltaTime);
 
         screenPos = cam.WorldToScreenPoint(transform.position);
     }
@@ -103,7 +113,7 @@ public class Enemy : MonoBehaviour, Ship
 
     public void setId(int id)
     {
-        this.id = id;
+        this.idEnemy = id;
     }
 
     public void makeDammage(int dammage)
@@ -129,7 +139,7 @@ public class Enemy : MonoBehaviour, Ship
         FindAnyObjectByType<ScoreManager>().addPoint(pointForDestroy);
 
         EnemySpawn enSys = FindObjectOfType<EnemySpawn>();
-        enSys.freeId(id);
+        enSys.freeId(idEnemy);
         enSys.spawn();
         Destroy(gameObject);
     }
@@ -140,11 +150,7 @@ public class Enemy : MonoBehaviour, Ship
 
         Invoke("turnEnemyShip", Random.Range(1, delayTurn));
 
-        int dirr = getDirrTurn();
-
-        if (!System.Convert.ToBoolean(dirr)) return;
-
-        transform.Translate(dirr, 0f, 0f);
+        setSpeedRotate(getDirrTurn());
     }
 
     public int getDirrTurn()
@@ -183,10 +189,19 @@ public class Enemy : MonoBehaviour, Ship
         Debug.DrawRay(ray.origin, ray.direction, Color.yellow, 2);
 
         if (!Physics.Raycast(ray, 1.44f))
-        {
             return true;
-        }
 
         return false;
+    }
+
+    private void setSpeedRotate(float speed)
+    {
+        speedRotate = speed > 0 ? Mathf.Abs(speed) : -Mathf.Abs(speed);
+        Invoke("resetTurn", timeTurn);
+    }
+
+    private void resetTurn()
+    {
+        speedRotate = 0;
     }
 }
